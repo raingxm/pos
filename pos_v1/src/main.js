@@ -1,11 +1,11 @@
 //TODO: Please write code in this file.
 function printInventory(inputCart) {
-  printTitle();
-  printStarsLine();
+
+    console.log(getWeighingFoodBarcode("ITEM000003-2"));
 
 }
 
-function getItemPriceByBarecode(barcode) {
+function getItemPriceByBarcode(barcode) {
   var allItems = loadAllItems();
   for(var i = 0; i < allItems.length; i++) {
     if(allItems[i].barcode === barcode) {
@@ -26,4 +26,16 @@ function starsLine() {
 
 function dottedLine() {
   return "----------------------\n";
+}
+
+function isWeighingFood(inputItem) {
+  return inputItem.contains('-');
+}
+
+function getWeighingFoodAmount(inputItem) {
+  return parseInt(inputItem.split('-')[1]);
+}
+
+function getWeighingFoodBarcode(inputItem) {
+  return inputItem.split('-')[0];
 }
