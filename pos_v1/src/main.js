@@ -1,19 +1,18 @@
 //TODO: Please write code in this file.
 function printInventory(inputCart) {
 
-    console.log(getWeighingFoodBarcode("ITEM000003-2"));
+
 
 }
 
-function getItemPriceByBarcode(barcode) {
+function getItemByBarcode(barcode) {
   var allItems = loadAllItems();
   for(var i = 0; i < allItems.length; i++) {
     if(allItems[i].barcode === barcode) {
-      return allItems[i].price;
+      return allItems[i];
     }
   }
-
-  return 0;
+  return null;
 }
 
 function title() {
