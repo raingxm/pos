@@ -16,14 +16,14 @@ function getItemPriceByBarecode(barcode) {
   return 0;
 }
 
-function printTitle() {
-  console.log("***<没钱赚商店>购物清单***");
+function title() {
+  return "***<没钱赚商店>购物清单***\n";
 }
 
-function printStarsLine() {
-  console.log("**********************");
+function starsLine() {
+  return "**********************";
 }
 
-function printDottedLine() {
-  console.log("----------------------");
+function dottedLine() {
+  return "----------------------\n";
 }
