@@ -28,14 +28,14 @@ function dottedLine() {
   return "----------------------\n";
 }
 
-function isWeighingFood(inputItem) {
+function isWeighingGood(inputItem) {
   return inputItem.contains('-');
 }
 
-function getWeighingFoodAmount(inputItem) {
+function getWeighingGoodAmount(inputItem) {
   return parseInt(inputItem.split('-')[1]);
 }
 
-function getWeighingFoodBarcode(inputItem) {
+function getWeighingGoodBarcode(inputItem) {
   return inputItem.split('-')[0];
 }
