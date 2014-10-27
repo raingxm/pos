@@ -6,3 +6,11 @@ function printInventory(cart) {
 function printTitle() {
   console.log("***<没钱赚商店>购物清单***");
 }
+
+function printStarsLine() {
+  console.log("**********************");
+}
+
+function printDottedLine() {
+  console.log("----------------------");
+}
