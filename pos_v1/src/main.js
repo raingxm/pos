@@ -1,7 +1,7 @@
 function printInventory(inputs) {
   var goodMap = getItemsCountMapFromInput(inputs);
   var res = title() + getItemsList(goodMap) + dottedLine() + getGiftGoodsList(goodMap)  +
-              dottedLine();
+              dottedLine() + getTotalInfoList(goodMap) + starsLine();
   console.log(res);
 }
 
@@ -21,6 +21,19 @@ function getItemList(barcode, amount) {
                     "，单价：" + good.price.toFixed(2) + "(元)，小计：" +
                     totalPrice.toFixed(2) + "(元)\n";
   return result;
+}
+
+function getTotalInfoList(goodMap) {
+  var savedMoney = 0;
+  var totalMoney = 0;
+  for(var barcode in goodMap) {
+    var good = getItemByBarcode(barcode);
+    var amount = goodMap[barcode];
+    totalMoney += good.price * amount;
+    if(isItemFreeAGood(barcode, amount)) savedMoney += good.price;
+  }
+  return "总计：" + (totalMoney - savedMoney).toFixed(2) + "(元)\n" +
+            "节省：" + savedMoney.toFixed(2) + "(元)\n";
 }
 
 function getGiftGoodsList(goodMap) {
