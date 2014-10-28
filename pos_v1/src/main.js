@@ -1,18 +1,13 @@
 function printInventory(inputs) {
-  var promot1 = isItemFreeAGood("ITEM000000", 1);
-  console.log(promot1);
-
-  var promot2 = isItemFreeAGood("ITEM000002", 3);
-  console.log(promot2);
-
-  var promot3 = isItemFreeAGood("ITEM000000", 4);
-  console.log(promot3);
+  var goodMap = getItemsCountMapFromInput(inputs);
+  var res = getItemsList(goodMap);
+  console.log(res);
 }
 
 function getItemsList(goodMap) {
   var itemsInfo = "";
   for(var barcode in goodMap) {
-    itemsInfo += getItemList(barcoe, goodMap[barcode]);
+    itemsInfo += getItemList(barcode, goodMap[barcode]);
   }
   return itemsInfo;
 }
@@ -20,6 +15,7 @@ function getItemsList(goodMap) {
 function getItemList(barcode, amount) {
   var good = getItemByBarcode(barcode);
   var totalPrice = good.price * amount;
+  if(isItemFreeAGood(barcode, amount)) totalPrice -= good.price;
   var result = "名称：" + good.name + "，数量：" + amount + good.unit +
                     "，单价：" + good.price.toFixed(2) + "(元)，小计：" +
                     totalPrice.toFixed(2) + "(元)\n";
