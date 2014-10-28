@@ -1,17 +1,25 @@
-//TODO: Please write code in this file.
 function printInventory(inputs) {
-
-  console.log(getItemsCountMapFromInput(inputs)["ITEM000001"] + "");
+  var res = getItemList("ITEM000001", 5);
+  console.log(res);
 }
 
-function getItemsList() {
+function getItemsList(goodMap) {
   var itemsInfo = "";
 
-  // for(var key in goodMap) {
-  //   itemsInfo += getItemList(key, goodMap[key]);
-  // }
-  //
-  // return itemsInfo;
+  for(var key in goodMap) {
+    itemsInfo += getItemList(key, goodMap[key]);
+  }
+
+  return itemsInfo;
+}
+
+function getItemList(barcode, amount) {
+  var good = getItemByBarcode(barcode);
+  var totalPrice = good.price * amount;
+  var result = "名称：" + good.name + "，数量：" + amount + good.unit +
+                    "，单价：" + good.price.toFixed(2) + "(元)，小计：" +
+                    totalPrice.toFixed(2) + "(元)\n";
+  return result;
 }
 
 function getItemsCountMapFromInput(inputCart) {
@@ -35,10 +43,6 @@ function getItemsCountMapFromInput(inputCart) {
   }
   return goodMap;
 }
-
-// function getItemList(barcode, amount) {
-//   return barcode + amount;
-// }
 
 function getItemByBarcode(barcode) {
   var allItems = loadAllItems();
