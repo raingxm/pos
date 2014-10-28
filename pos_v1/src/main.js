@@ -1,15 +1,15 @@
 function printInventory(inputs) {
-  var res = getItemList("ITEM000001", 5);
-  console.log(res);
+  var promot1 = isPromotionGoodBuyTwoFreeOne('ITEM000004');
+  var promot2 = isPromotionGoodBuyTwoFreeOne('ITEM000005');
+  console.log(promot1);
+  console.log(promot2);
 }
 
 function getItemsList(goodMap) {
   var itemsInfo = "";
-
   for(var key in goodMap) {
     itemsInfo += getItemList(key, goodMap[key]);
   }
-
   return itemsInfo;
 }
 
@@ -20,6 +20,20 @@ function getItemList(barcode, amount) {
                     "，单价：" + good.price.toFixed(2) + "(元)，小计：" +
                     totalPrice.toFixed(2) + "(元)\n";
   return result;
+}
+
+function isPromotionGoodBuyTwoFreeOne(barcode) {
+  var promotions= loadPromotions();
+  for(var i = 0; i < promotions.length; i++) {
+    var promotion = promotions[i];
+    if(promotion.type === 'BUY_TWO_GET_ONE_FREE') {
+      for(var j=0; j < promotion.barcodes.length; j++) {
+        if(promotion.barcodes[j] === barcode) return true;
+      }
+      return false;
+    }
+  }
+  return false;
 }
 
 function getItemsCountMapFromInput(inputCart) {
