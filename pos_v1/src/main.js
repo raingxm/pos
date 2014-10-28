@@ -111,7 +111,7 @@ function dottedLine() {
 }
 
 function isWeighingGood(inputItem) {
-  return inputItem.contains('-');
+  return inputItem.indexOf("-") != -1;
 }
 
 function getWeighingGoodAmount(inputItem) {
