@@ -1,4 +1,5 @@
-var LineItem = function(name, price, amount, unit) {
+var LineItem = function(barcode, name, price, amount, unit) {
+  this.barcode = barcode;
   this.name = name;
   this.price = price;
   this.amount = amount;
@@ -16,5 +17,23 @@ LineItem.prototype.format = function() {
 };
 
 LineItem.prototype.savingAmount = function() {
+  var promotions = loadPromotions();
+  var savingAmount = 0;
+  for(var i = 0; i < promotions.length; i++) {
+    switch(promotions[i].type) {
+      case 'BUY_TWO_GET_ONE_FREE':
+        savingAmount += dealWithBuyTwoFreeOne(promotions[i].barcodes);
+        break;
+    }
+  }
+  return savingAmount;
+};
 
+LineItem.prototype.dealWithBuyTwoFreeOne = function(promotBarcodes) {
+  for(var i = 0; i < promotBarcodes; i++) {
+    if(this.barcode == promotBarcodes[i]) {
+      return this.amount / 3;
+    }
+  }
+  return 0;
 };

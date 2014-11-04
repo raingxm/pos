@@ -32,7 +32,7 @@ ShoppingCart.prototype.initCart = function() {
   for(var i = 0; i < items.length; i++) {
     if(itemsCountMap.hasOwnProperty(items[i].barcode)) {
       var amount = itemsCountMap[items[i].barcode];
-      var lineItem = new LineItem(items[i].name, items[i].price, amount,
+      var lineItem = new LineItem(items[i].barcode, items[i].name, items[i].price, amount,
                                 items[i].unit);
       this.add(lineItem);
     }
