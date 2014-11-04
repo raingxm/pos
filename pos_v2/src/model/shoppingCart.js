@@ -11,6 +11,27 @@ ShoppingCart.prototype.shoppingInfo = function() {
   return res;
 };
 
+ShoppingCart.prototype.title = function() {
+  return "***<没钱赚商店>购物清单***\n" + "打印时间：" +
+      this.currentDate() + "\n" ;
+};
+
+ShoppingCart.prototype.currentDate = function() {
+  var dateDigitToString = function (num) {
+      return num < 10 ? '0' + num : num;
+  };
+  var currentDate = new Date(),
+      year = dateDigitToString(currentDate.getFullYear()),
+      month = dateDigitToString(currentDate.getMonth() + 1),
+      date = dateDigitToString(currentDate.getDate()),
+      hour = dateDigitToString(currentDate.getHours()),
+      minute = dateDigitToString(currentDate.getMinutes()),
+      second = dateDigitToString(currentDate.getSeconds()),
+      formattedDateString = year + '年' + month +
+      '月' + date + '日 ' + hour + ':' + minute + ':' + second;
+  return formattedDateString;  
+};
+
 ShoppingCart.prototype.itemLinesInfo = function() {
   var res = "";
   for(var i = 0; i < this.count(); i++) {
@@ -67,10 +88,6 @@ ShoppingCart.prototype.getItemsCountMapFromInput = function() {
     }
   }
   return itemsCountMap;
-};
-
-ShoppingCart.prototype.title = function() {
-  return "***<没钱赚商店>购物清单***\n";
 };
 
 ShoppingCart.prototype.starsLine = function() {
