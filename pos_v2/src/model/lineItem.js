@@ -10,10 +10,22 @@ LineItem.prototype.totalPrice = function() {
   return this.price * this.amount;
 };
 
+LineItem.prototype.payedPrice = function() {
+  return this.totalPrice() - this.savingPrice();
+};
+
 LineItem.prototype.format = function() {
   return "名称：" + this.name + "，数量：" + this.amount + this.unit +
       "，单价：" + this.price.toFixed(2) + "(元)，小计：" +
-      this.totalPrice().toFixed(2) + "(元)\n";
+      this.payedPrice().toFixed(2) + "(元)\n";
+};
+
+LineItem.prototype.formatGiftItems = function() {
+  var res = "";
+  if(this.isPromot()) {
+    res += "名称：" + this.name + "，数量：" + this.savingAmount() + this.unit + "\n";
+  }
+  return res;
 };
 
 LineItem.prototype.isPromot = function() {

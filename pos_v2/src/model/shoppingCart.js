@@ -4,17 +4,9 @@ var ShoppingCart = function(inputs) {
   this.initCart();
 };
 
-ShoppingCart.prototype.add = function(lineItem) {
-  this.collection.push(lineItem);
-};
-
-ShoppingCart.prototype.count = function() {
-  return this.collection.length;
-};
-
 ShoppingCart.prototype.shoppingInfo = function() {
   var res = this.title() + this.dottedLine() + this.itemLinesInfo() +
-            this.dottedLine();
+            this.dottedLine() + this.giftItemsInfo() + this.dottedLine();
   return res;
 };
 
@@ -22,6 +14,14 @@ ShoppingCart.prototype.itemLinesInfo = function() {
   var res = "";
   for(var i = 0; i < this.count(); i++) {
     res += this.collection[i].format();
+  }
+  return res;
+};
+
+ShoppingCart.prototype.giftItemsInfo = function() {
+  var res = "挥泪赠送商品：\n";
+  for(var i = 0; i < this.count(); i++) {
+    res += this.collection[i].formatGiftItems();
   }
   return res;
 };
@@ -79,4 +79,13 @@ ShoppingCart.prototype.weighingGoodAmount = function(inputItem) {
 
 ShoppingCart.prototype.weighingGoodBarcode = function(inputItem) {
   return inputItem.split('-')[0];
+};
+
+
+ShoppingCart.prototype.add = function(lineItem) {
+  this.collection.push(lineItem);
+};
+
+ShoppingCart.prototype.count = function() {
+  return this.collection.length;
 };
