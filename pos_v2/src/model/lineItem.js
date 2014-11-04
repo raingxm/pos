@@ -21,11 +21,9 @@ LineItem.prototype.format = function() {
 };
 
 LineItem.prototype.formatGiftItems = function() {
-  var res = "";
-  if(this.isPromot()) {
-    res += "名称：" + this.name + "，数量：" + this.savingAmount() + this.unit + "\n";
-  }
-  return res;
+  var res = "名称：" + this.name + "，数量：" + this.savingAmount() +
+      this.unit + "\n";
+  return this.isPromot() ? res : "";
 };
 
 LineItem.prototype.isPromot = function() {
