@@ -20,6 +20,10 @@ LineItem.prototype.isPromot = function() {
   return (this.savingAmount() + "") != "0";
 };
 
+LineItem.prototype.savingPrice = function() {
+  return this.savingAmount() * this.price;
+};
+
 LineItem.prototype.savingAmount = function() {
   var promotions = loadPromotions();
   var savingAmount = 0;
