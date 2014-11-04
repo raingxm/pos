@@ -6,7 +6,8 @@ var ShoppingCart = function(inputs) {
 
 ShoppingCart.prototype.shoppingInfo = function() {
   var res = this.title() + this.dottedLine() + this.itemLinesInfo() +
-            this.dottedLine() + this.giftItemsInfo() + this.dottedLine();
+            this.dottedLine() + this.giftItemsInfo() + this.dottedLine() +
+            this.totalInfo() + this.starsLine();
   return res;
 };
 
@@ -24,6 +25,17 @@ ShoppingCart.prototype.giftItemsInfo = function() {
     res += this.collection[i].formatGiftItems();
   }
   return res;
+};
+
+ShoppingCart.prototype.totalInfo = function() {
+  var sumPrice = 0;
+  var savingPrice = 0;
+  for(var i = 0; i < this.count(); i++) {
+    sumPrice += this.collection[i].payedPrice();
+    savingPrice += this.collection[i].savingPrice();
+  }
+  return "总计：" + sumPrice.toFixed(2) + "(元)\n" +
+          "节省：" + savingPrice.toFixed(2) + "(元)\n";
 };
 
 ShoppingCart.prototype.initCart = function() {
