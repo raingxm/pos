@@ -7,5 +7,5 @@ ShoppingCart.prototype.add = function(lineItem) {
 };
 
 ShoppingCart.prototype.count = function() {
-  return this.collection.length();
+  return this.collection.length;
 };

@@ -42,6 +42,10 @@ var getItemsCountMapFromInput = function(inputs) {
 };
 
 var printInventory = function(inputs) {
-  var lineItem = new LineItem("雪碧", 3, 2, "瓶");
-  console.log(lineItem.format());
+  var xuebi = new LineItem("雪碧", 3, 2, "瓶");
+  var dianchi = new LineItem("电池", 3, 2, "瓶");
+  var shoppingCart = new ShoppingCart();
+  shoppingCart.add(xuebi);
+  shoppingCart.add(dianchi);
+  console.log(shoppingCart.count()+"");
 };
