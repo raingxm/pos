@@ -1,4 +1,5 @@
 var printInventory = function(inputs) {
   var shoppingCart = new ShoppingCart(inputs);
-  console.log(shoppingCart.shoppingInfo());
+  var lineItem = new LineItem('ITEM000000', '可口可乐', 3.00, 2, '瓶');
+  console.log(lineItem.isPromot());
 };

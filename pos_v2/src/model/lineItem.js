@@ -16,13 +16,17 @@ LineItem.prototype.format = function() {
       this.totalPrice().toFixed(2) + "(元)\n";
 };
 
+LineItem.prototype.isPromot = function() {
+  return (this.savingAmount() + "") != "0";
+};
+
 LineItem.prototype.savingAmount = function() {
   var promotions = loadPromotions();
   var savingAmount = 0;
   for(var i = 0; i < promotions.length; i++) {
     switch(promotions[i].type) {
       case 'BUY_TWO_GET_ONE_FREE':
-        savingAmount += dealWithBuyTwoFreeOne(promotions[i].barcodes);
+        savingAmount += this.dealWithBuyTwoFreeOne(promotions[i].barcodes);
         break;
     }
   }
@@ -30,9 +34,9 @@ LineItem.prototype.savingAmount = function() {
 };
 
 LineItem.prototype.dealWithBuyTwoFreeOne = function(promotBarcodes) {
-  for(var i = 0; i < promotBarcodes; i++) {
+  for(var i = 0; i < promotBarcodes.length; i++) {
     if(this.barcode == promotBarcodes[i]) {
-      return this.amount / 3;
+      return Math.floor(this.amount / 3);
     }
   }
   return 0;
