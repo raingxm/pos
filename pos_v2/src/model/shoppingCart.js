@@ -1,6 +1,7 @@
 var ShoppingCart = function(inputs) {
   this.inputs = inputs;
   this.collection = [];
+  this.initCart();
 };
 
 ShoppingCart.prototype.add = function(lineItem) {
@@ -13,21 +14,36 @@ ShoppingCart.prototype.count = function() {
 
 ShoppingCart.prototype.getItemsCountMapFromInput = function() {
   var itemsCountMap = {};
-  for(var i = 0; i < inputs.length; i++) {
-    if(isWeighingGood(inputs[i])) {
-      var barcode = weighingGoodBarcode(inputs[i]);
-      itemsCountMap[barcode] = weighingGoodAmount(inputs[i]);
+  for(var i = 0; i < this.inputs.length; i++) {
+    if(this.isWeighingGood(this.inputs[i])) {
+      var barcode = this.weighingGoodBarcode(this.inputs[i]);
+      itemsCountMap[barcode] = this.weighingGoodAmount(this.inputs[i]);
       continue;
     }
 
-    if(itemsCountMap.hasOwnProperty(inputs[i])) {
-      itemsCountMap[inputs[i]]++;
+    if(itemsCountMap.hasOwnProperty(this.inputs[i])) {
+      itemsCountMap[this.inputs[i]]++;
     } else {
-      itemsCountMap[inputs[i]] = 1;
+      itemsCountMap[this.inputs[i]] = 1;
     }
   }
   return itemsCountMap;
 };
+
+ShoppingCart.prototype.initCart = function() {
+  var itemsCountMap = this.getItemsCountMapFromInput();
+  var items = loadAllItems();
+  for(var i = 0; i < items.length; i++) {
+    if(itemsCountMap.hasOwnProperty(items[i].barcode)) {
+      var amount = itemsCountMap[items[i]];
+      var lineItem = new LineItem(items[i].name, items[i].price, amount,
+                                items[i].unit);
+      this.add(lineItem);
+    }
+  }
+};
+
+
 
 ShoppingCart.prototype.isWeighingGood = function(inputItem) {
   return inputItem.indexOf("-") != -1;
