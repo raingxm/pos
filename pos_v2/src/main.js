@@ -1,1 +1,6 @@
-//TODO: Please write code in this file.
+
+var printInventory = function() {
+
+};
+
+printInventory();
