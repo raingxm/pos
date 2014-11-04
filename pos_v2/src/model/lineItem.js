@@ -14,3 +14,7 @@ LineItem.prototype.format = function() {
       "，单价：" + this.price.toFixed(2) + "(元)，小计：" +
       this.totalPrice().toFixed(2) + "(元)\n";
 };
+
+LineItem.prototype.savingAmount = function() {
+
+};

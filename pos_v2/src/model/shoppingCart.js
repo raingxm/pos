@@ -12,6 +12,33 @@ ShoppingCart.prototype.count = function() {
   return this.collection.length;
 };
 
+ShoppingCart.prototype.shoppingInfo = function() {
+  var res = this.title() + this.dottedLine() + this.itemLinesInfo() +
+            this.dottedLine();
+  return res;
+};
+
+ShoppingCart.prototype.itemLinesInfo = function() {
+  var res = "";
+  for(var i = 0; i < this.count(); i++) {
+    res += this.collection[i].format();
+  }
+  return res;
+};
+
+ShoppingCart.prototype.initCart = function() {
+  var itemsCountMap = this.getItemsCountMapFromInput();
+  var items = loadAllItems();
+  for(var i = 0; i < items.length; i++) {
+    if(itemsCountMap.hasOwnProperty(items[i].barcode)) {
+      var amount = itemsCountMap[items[i].barcode];
+      var lineItem = new LineItem(items[i].name, items[i].price, amount,
+                                items[i].unit);
+      this.add(lineItem);
+    }
+  }
+};
+
 ShoppingCart.prototype.getItemsCountMapFromInput = function() {
   var itemsCountMap = {};
   for(var i = 0; i < this.inputs.length; i++) {
@@ -30,20 +57,17 @@ ShoppingCart.prototype.getItemsCountMapFromInput = function() {
   return itemsCountMap;
 };
 
-ShoppingCart.prototype.initCart = function() {
-  var itemsCountMap = this.getItemsCountMapFromInput();
-  var items = loadAllItems();
-  for(var i = 0; i < items.length; i++) {
-    if(itemsCountMap.hasOwnProperty(items[i].barcode)) {
-      var amount = itemsCountMap[items[i]];
-      var lineItem = new LineItem(items[i].name, items[i].price, amount,
-                                items[i].unit);
-      this.add(lineItem);
-    }
-  }
+ShoppingCart.prototype.title = function() {
+  return "***<没钱赚商店>购物清单***\n";
 };
 
+ShoppingCart.prototype.starsLine = function() {
+  return "**********************";
+};
 
+ShoppingCart.prototype.dottedLine = function() {
+  return "----------------------\n";
+};
 
 ShoppingCart.prototype.isWeighingGood = function(inputItem) {
   return inputItem.indexOf("-") != -1;
