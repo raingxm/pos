@@ -42,6 +42,6 @@ var getItemsCountMapFromInput = function(inputs) {
 };
 
 var printInventory = function(inputs) {
-  var itemCountMap = getItemsCountMapFromInput(inputs);
-  console.log(itemCountMap);
+  var lineItem = new LineItem("雪碧", 3, 2, "瓶");
+  console.log(lineItem.format());
 };
